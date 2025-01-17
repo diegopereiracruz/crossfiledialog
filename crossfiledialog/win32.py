@@ -19,6 +19,7 @@ class Win32Exception(FileDialogException):
 
 
 last_cwd = None
+ORIGINAL_CWD = os.getcwd()
 
 
 def get_preferred_cwd():
@@ -34,6 +35,10 @@ def get_preferred_cwd():
 def set_last_cwd(cwd):
     global last_cwd
     last_cwd = os.path.dirname(cwd)
+
+
+def restore_cwd():
+    os.chdir(ORIGINAL_CWD)
 
 
 def error_handling_wrapper(struct, **kwargs):
@@ -111,6 +116,7 @@ def open_file(title=strings.open_file, start_dir=None, filter=None):
 
     if file_name:
         set_last_cwd(file_name)
+        restore_cwd()
     return file_name
 
 
@@ -179,6 +185,7 @@ def open_multiple(title=strings.open_multiple, start_dir=None, filter=None):
             file_names_list = [os.path.join(dirname, file_name) for file_name in file_names_list_nodir]
 
         set_last_cwd(file_names_list[0])
+        restore_cwd()
         return file_names_list
 
     return []
@@ -212,6 +219,7 @@ def save_file(title=strings.save_file, start_dir=None):
 
     if file_name:
         set_last_cwd(file_name)
+        restore_cwd()
     return file_name
 
 
@@ -245,6 +253,7 @@ def choose_folder(title=strings.choose_folder, start_dir=None):
     if pidl:
         path = shell.SHGetPathFromIDListW(pidl)
         # set_last_cwd(path)
+        restore_cwd()
         return path
 
 
