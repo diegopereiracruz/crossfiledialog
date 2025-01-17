@@ -1,6 +1,11 @@
 CrossFileDialog
 ===============
+## WHAT WAS MODIFIED?
+✨ FIXED: CrossFileDialog was changing the working directory (CWD) to the location of the selected file/folder.
 
+✨ FIXED: Now, after selecting a folder, the default root directory is restored (and not saved as before).
+
+## What is CrossFileDialog?
 A Python wrapper for opening files and folders with the native file dialog.
 
 Makes it easy to prompt the user with a native filepicker on all supported platforms.
