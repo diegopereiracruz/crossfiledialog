@@ -232,8 +232,8 @@ def choose_folder(title=strings.choose_folder, start_dir=None):
     """
     if start_dir:
         start_pidl, _ = shell.SHParseDisplayName(start_dir, 0, None)
-    elif last_cwd:
-        start_pidl, _ = shell.SHParseDisplayName(last_cwd, 0, None)
+    # elif last_cwd:
+    #     start_pidl, _ = shell.SHParseDisplayName(last_cwd, 0, None)
     else:
         # default directory is the desktop
         start_pidl = shell.SHGetFolderLocation(0, shellcon.CSIDL_DESKTOP, 0, 0)
@@ -244,7 +244,7 @@ def choose_folder(title=strings.choose_folder, start_dir=None):
 
     if pidl:
         path = shell.SHGetPathFromIDListW(pidl)
-        set_last_cwd(path)
+        # set_last_cwd(path)
         return path
 
 
